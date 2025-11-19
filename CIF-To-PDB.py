@@ -20,19 +20,32 @@ import os
 import pdb
 import subprocess
 import sys
+import pathlib
 from tqdm import tqdm
 
 # Define the input and output directories
-input_cif_directory = "./"
-output_pdb_directory = "./output_pdbs/"
+input_cif_directory = None
+output_pdb_directory = None
+default_output_dir = "output_pdbs"
 
 try:
     if len(sys.argv[1]) > 1:
-        input_cif_directory = sys.argv[1]
+        input_cif_directory = pathlib.Path(sys.argv[1])
+        # if an input dir is given, use it.
+    else:
+        input_cif_directory = pathlib.Path('.')
+        # otherwise, the cwd will be used.
     if len(sys.argv[2]) > 2:
-        output_pdb_directory = sys.argv[2]
-except:
+        output_pdb_directory = pathlib.Path(sys.argv[2])
+        # if an output dir is given, use it.
+    else:
+        output_pdb_directory = input_cif_directory / default_output_dir
+        # otherwise, append the default output dir to the input dir.
+    input_cif_directory = str(input_cif_directory)
+    output_pdb_directory = str(output_pdb_directory)
+except Exception as e:
     print(f"could not parse args!")
+    raise e
 finally:
     print(f"input_cif_directory={input_cif_directory}\noutput_pdb_directory={output_pdb_directory}")
 
