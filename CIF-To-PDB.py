@@ -23,15 +23,18 @@ import sys
 from tqdm import tqdm
 
 # Define the input and output directories
-output_pdb_directory = "output_pdbs/"
+input_cif_directory = "./"
+output_pdb_directory = "./output_pdbs/"
 
-# Check if the command line arguments are provided correctly
-if len(sys.argv) < 2:
-    print("Please provide the necessary arguments: script_name.py Cifs_files-Folder/")
-    sys.exit(1)
-    
-# Path to the sequence 
-input_cif_directory = str(sys.argv[1])
+try:
+    if len(sys.argv[1]) > 1:
+        input_cif_directory = sys.argv[1]
+    if len(sys.argv[2]) > 2:
+        output_pdb_directory = sys.argv[2]
+except:
+    print(f"could not parse args!")
+finally:
+    print(f"input_cif_directory={input_cif_directory}\noutput_pdb_directory={output_pdb_directory}")
 
 # Create output and temporary directories if they don't exist
 os.makedirs(output_pdb_directory, exist_ok=True)
