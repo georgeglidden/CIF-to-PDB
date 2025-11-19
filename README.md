@@ -4,7 +4,8 @@ The script will convert in batch mode CIF files in a CIF-folder to PDB in output
  - Python 3.x
 ## Python packages:
  - Open Babel
- conda install openbabel
+
+ conda install openbabel -c conda-forge
 ## USAGE 
 python CIF-to-PDB.py path_to_CIFS_files_FOLDER/
 
