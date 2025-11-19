@@ -29,13 +29,14 @@ output_pdb_directory = None
 default_output_dir = "output_pdbs"
 
 try:
-    if len(sys.argv[1]) > 1:
+    n_args = len(sys.argv)
+    if n_args > 1:
         input_cif_directory = pathlib.Path(sys.argv[1])
         # if an input dir is given, use it.
     else:
         input_cif_directory = pathlib.Path('.')
         # otherwise, the cwd will be used.
-    if len(sys.argv[2]) > 2:
+    if n_args > 2:
         output_pdb_directory = pathlib.Path(sys.argv[2])
         # if an output dir is given, use it.
     else:
